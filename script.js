@@ -206,20 +206,23 @@ againBtn.addEventListener("click", () => {
 
 function getUser() {
   checkPasswords(resetPassword, resetAgainPassword);
-
   registrated.forEach((user, i) => {
     if (
-      loginToReset.value === user.nickname ||
-      loginToReset.value === user.email
+      loginToReset.value === user.nickname &&
+      resetPassword.value === resetAgainPassword.value &&
+      resetPassword.classList.contains("good") &&
+      resetAgainPassword.classList.contains("good")
     ) {
       user.password = resetPassword.value;
 
       registrated.splice(i, 1, user);
+
+      loggingContainer.style.display = `block`;
+      resetPasswordContainer.style.display = "none";
+    } else {
+      console.log("NO");
     }
   });
-
-  loggingContainer.style.display = `block`;
-  resetPasswordContainer.style.display = "none";
 }
 
 changePasswordBtn.addEventListener("click", getUser);
