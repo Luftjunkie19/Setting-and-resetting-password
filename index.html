@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setting and resetting passwort</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="web-header">
+      <h1>Register, Logging and resetting</h1>
+    </div>
+
+    <div class="container">
+      <div class="register-container">
+        <h2 class="header">Join us, Habibi</h2>
+
+        <div class="control">
+          <label for="name">Nickname:</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your Nickname"
+            autocomplete="off"
+          />
+          <small class="info"></small>
+        </div>
+
+        <div class="control">
+          <label for="email">Email:</label>
+          <input
+            type="text"
+            id="email"
+            placeholder="Enter your email"
+            autocomplete="off"
+          />
+          <small class="info"></small>
+        </div>
+
+        <div class="control">
+          <label for="password-first">Password:</label>
+          <input
+            type="password"
+            id="password-first"
+            placeholder="Enter your password"
+            autocomplete="off"
+          />
+          <button class="btn eye-on"><i class="fas fa-eye fa-2x"></i></button>
+          <button class="btn eye-off">
+            <i class="fas fa-eye-slash fa-2x"></i>
+          </button>
+          <small class="info"></small>
+        </div>
+
+        <div class="control">
+          <label for="password-second">Repeat Password:</label>
+          <input
+            type="password"
+            id="password-second"
+            placeholder="Repeat your password"
+            autocomplete="off"
+          />
+          <button class="btn eye-on"><i class="fas fa-eye fa-2x"></i></button>
+          <button class="btn eye-off">
+            <i class="fas fa-eye-slash fa-2x"></i>
+          </button>
+          <small class="info"></small>
+        </div>
+
+        <button class="btn account-have">Login</button>
+
+        <button class="btn submit-register">Register now</button>
+      </div>
+
+      <div class="logging-container">
+        <h2 class="header">Visit us again, Habibi</h2>
+
+        <div class="control">
+          <label for="login">Login</label>
+          <input
+            type="text"
+            name="login"
+            id="login"
+            placeholder="Your email or nickname"
+            autocomplete="off"
+          />
+          <small class="info"></small>
+        </div>
+
+        <div class="control">
+          <label for="login-password">Password</label>
+          <input
+            type="text"
+            name="login-password"
+            id="login-password"
+            placeholder="Enter your password"
+            autocomplete="off"
+          />
+          <small class="info"></small>
+        </div>
+
+        <a href="#" class="btn reset">Reset your password</a>
+
+        <button class="btn submit-logging">Login</button>
+      </div>
+
+      <div class="reset-password-container">
+        <h1>Reset your password</h1>
+        <div class="provide-login">
+          <div class="control">
+            <label for="reset-login">Login</label>
+            <input
+              type="text"
+              name="reset-login"
+              id="reset-login"
+              placeholder="Enter your login or email"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="control">
+          <label for="reset-password">Password</label>
+          <input
+            type="text"
+            name="reset-password"
+            id="reset-password"
+            placeholder="Enter your new password"
+            autocomplete="off"
+          />
+          <small class="info"></small>
+        </div>
+
+        <div class="control">
+          <label for="reset-again">Password</label>
+          <input
+            type="text"
+            name="reset-again"
+            id="reset-again"
+            placeholder="Repeat your new password"
+            autocomplete="off"
+          />
+          <small class="info"></small>
+        </div>
+
+        <div class="btn change">Change it</div>
+      </div>
+
+      <div class="final-msg">
+        <h1 class="final-title">Thank you</h1>
+        <p class="final-text"></p>
+        <button class="btn again">Again</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
