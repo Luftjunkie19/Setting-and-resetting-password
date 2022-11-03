@@ -189,10 +189,7 @@ function loggingIn() {
   let enteredPassword = passwordLogin.value;
 
   registrated.forEach((user) => {
-    if (
-      enteredLogin === user.nickname ||
-      (enteredLogin === user.email && enteredPassword === user.password)
-    ) {
+    if (enteredLogin === user.nickname && enteredPassword === user.password) {
       showFinalMessage(user.nickname);
       removeAllClasses(login);
       removeAllClasses(passwordLogin);
