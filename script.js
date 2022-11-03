@@ -69,7 +69,7 @@ function showPassword(e) {
   if (e.target.classList.contains("eye-on")) {
     e.target.style.display = `none`;
     //
-    e.target.nextElementSibling.style.display = "flex";
+    e.target.nextElementSibling.style.display = "block";
     //
     e.target.previousElementSibling.type = "text";
   }
@@ -79,7 +79,7 @@ function vanishPassword(e) {
   if (e.target.classList.contains("eye-off")) {
     e.target.style.display = `none`;
     //
-    e.target.previousElementSibling.style.display = "flex";
+    e.target.previousElementSibling.style.display = "block";
     //
     e.target.previousElementSibling.previousElementSibling.type = "password";
   }
