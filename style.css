@@ -57,7 +57,6 @@ body {
   background-color: rgb(78, 78, 247);
   padding: 20px;
   margin-top: 10px;
-  display: flex;
   justify-content: center;
   flex-direction: column;
   border-radius: 5px;
@@ -66,6 +65,14 @@ body {
 
 .final-msg {
   align-items: center;
+  color: white;
+  background-color: rgb(78, 78, 247);
+  padding: 20px;
+  margin-top: 10px;
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
 }
 
 .control {
@@ -114,4 +121,10 @@ input:active {
 .btn.reset {
   text-decoration: none;
   color: white;
+}
+
+.btns-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
