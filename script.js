@@ -43,7 +43,7 @@ class User {
 }
 
 const testUser = new User("Kacper", "Kacperito@gmail.com", "Dzik_JTCNW100%");
-registrated.push(testUser);
+testUser.addNewUser(testUser);
 
 function removeAllClasses(element) {
   element.classList = ``;
@@ -71,7 +71,7 @@ function showPassword(e) {
     //
     e.target.nextElementSibling.style.display = "block";
     //
-    e.target.previousElementSibling.type = "text";
+    e.target.previousElementSibling.previousElementSibling.type = "text";
   }
 }
 
@@ -81,7 +81,8 @@ function vanishPassword(e) {
     //
     e.target.previousElementSibling.style.display = "block";
     //
-    e.target.previousElementSibling.previousElementSibling.type = "password";
+    e.target.previousElementSibling.previousElementSibling.previousElementSibling.type =
+      "password";
   }
 }
 
@@ -131,23 +132,21 @@ function checkPasswords(firstPassword, secondPassword) {
 registerContainer.addEventListener("click", showPassword);
 registerContainer.addEventListener("click", vanishPassword);
 
+function clearField(element) {
+  element.value = ``;
+}
+
 regSubmitBtn.addEventListener("click", () => {
   validateStuff(regNickname, "Nickname", 6, 25);
   validateEmail();
   checkPasswords(regPasswordFirst, regPasswordRepeat);
 
-  if (regNickname.value.trim("") === "") {
-    showWrong(regNickname, "This field is empty");
-  }
-  if (regEmail.value.trim("") === "") {
-    showWrong(regEmail, "This field is empty");
-  }
-  if (regPasswordFirst.value.trim("") === "") {
-    showWrong(regPasswordFirst, "This field is empty");
-  }
-  if (regPasswordRepeat.value.trim("") === "") {
-    showWrong(regPasswordRepeat, "This field is empty");
-  } else if (
+  checkIfempty(regNickname);
+  checkIfempty(regPasswordFirst);
+  checkIfempty(regPasswordRepeat);
+  checkIfempty(regEmail);
+
+  if (
     regNickname.classList.contains("wrong") ||
     regEmail.classList.contains("wrong") ||
     regPasswordFirst.classList.contains("wrong") ||
@@ -165,6 +164,16 @@ regSubmitBtn.addEventListener("click", () => {
 
     user.addNewUser(user);
     console.log(registrated);
+
+    removeAllClasses(regNickname);
+    removeAllClasses(regPasswordFirst);
+    removeAllClasses(regPasswordRepeat);
+    removeAllClasses(regEmail);
+
+    clearField(regNickname);
+    clearField(regEmail);
+    clearField(regPasswordFirst);
+    clearField(regPasswordRepeat);
 
     registerContainer.style.display = `none`;
     loggingContainer.style.display = `flex`;
@@ -193,13 +202,18 @@ function loggingIn() {
       showFinalMessage(user.nickname);
       removeAllClasses(login);
       removeAllClasses(passwordLogin);
+      clearField(passwordLogin);
+      clearField(login);
     } else {
       if (enteredLogin !== user.nickname) {
         removeAllClasses(login);
-        showWrong(login, "Check your login, it might be wrong");
-      } else if (enteredPassword !== user.password) {
+        showWrong(login, "Check your login, it might be wrong") ||
+          checkIfempty(login);
+      }
+      if (enteredPassword !== user.password) {
         removeAllClasses(passwordLogin);
-        showWrong(passwordLogin, "Password is wrong, maybe change it?");
+        showWrong(passwordLogin, "Password is wrong, maybe change it?") ||
+          checkIfempty(passwordLogin);
       }
     }
   });
@@ -214,6 +228,15 @@ resetPasswordBtn.addEventListener("click", openResetForm);
 function backToLogin() {
   resetPasswordContainer.style.display = `none`;
   loggingContainer.style.display = `flex`;
+  removeAllClasses(loginToReset);
+  removeAllClasses(resetPassword);
+  removeAllClasses(resetAgainPassword);
+
+  loginToReset.nextElementSibling.innerText = ``;
+  resetPassword.nextElementSibling.innerText = ``;
+  resetAgainPassword.nextElementSibling.innerText = ``;
+  clearField(login);
+  clearField(passwordLogin);
 }
 
 comeBackToLoginBtn.addEventListener("click", backToLogin);
@@ -223,33 +246,53 @@ againBtn.addEventListener("click", () => {
   window.location.reload();
 });
 
+function checkIfempty(element) {
+  if (element.value.trim("") === "") {
+    showWrong(element, "This field is empty");
+  }
+}
+
+function checkIfcorrect(term, element, something) {
+  if (term) {
+    showGood(element, `Your ${something} is valid, dude.`);
+  } else {
+    showWrong(element, `Sorry mate, your ${something} is invalid.`);
+  }
+}
+
 function getUser() {
+  let foundUser = registrated.filter(
+    (user) => user.nickname === loginToReset.value
+  );
+
   checkPasswords(resetPassword, resetAgainPassword);
-  registrated.forEach((user, i) => {
-    if (
-      loginToReset.value === user.nickname &&
-      resetPassword.value === resetAgainPassword.value &&
-      resetPassword.classList.contains("good") &&
-      resetAgainPassword.classList.contains("good")
-    ) {
-      user.password = resetPassword.value;
+  checkIfempty(loginToReset);
+  checkIfempty(resetPassword);
+  checkIfempty(resetAgainPassword);
+  checkIfcorrect(foundUser[0], loginToReset, "login");
 
-      registrated.splice(i, 1, user);
+  if (
+    foundUser[0] &&
+    resetPassword.value === resetAgainPassword.value &&
+    resetPassword.classList.contains("good") &&
+    resetAgainPassword.classList.contains("good")
+  ) {
+    foundUser[0].password = resetPassword.value;
 
-      loggingContainer.style.display = `flex`;
-      resetPasswordContainer.style.display = "none";
+    backToLogin();
 
-      loginToReset.value = ``;
-      resetPassword.value = ``;
-      resetAgainPassword.value = ``;
+    clearField(loginToReset);
+    clearField(resetPassword);
+    clearField(resetAgainPassword);
 
-      removeAllClasses(resetPassword);
-      removeAllClasses(resetAgainPassword);
-    } else {
-      console.log("NO");
-      console.log(registrated);
-    }
-  });
+    loginToReset.nextElementSibling.innerText = ``;
+
+    removeAllClasses(loginToReset);
+    removeAllClasses(resetPassword);
+    removeAllClasses(resetAgainPassword);
+  } else {
+    console.log("no");
+  }
 }
 
 changePasswordBtn.addEventListener("click", getUser);
